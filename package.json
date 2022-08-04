@@ -1,7 +1,7 @@
 {
   "name": "query-string-utils",
   "version": "0.1.0",
-  "description": "A small collection of helper functions for working with query strings.",
+  "description": "A small collection of utility functions for working with query strings.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
