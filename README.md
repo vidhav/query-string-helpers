@@ -1,17 +1,17 @@
-# Query string helpers
+# Query string utils
 
-A small collection of helper functions for working with query strings.
+A small collection of utility functions for working with query strings.
 
 ## Install
 
 ```
-$ npm install query-string-helpers
+$ npm install query-string-utils
 ```
 
 ## Usage
 
 ```js
-import { getQsNumber, getQsNumbers, getQsString, getQsStrings } from 'query-string-helpers';
+import { getQsNumber, getQsNumbers, getQsString, getQsStrings } from 'query-string-utils';
 
 const searchParams = new URLSearchParams(window.location.search);
 

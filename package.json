@@ -1,5 +1,5 @@
 {
-  "name": "query-string-helpers",
+  "name": "query-string-utils",
   "version": "0.1.0",
   "description": "A small collection of helper functions for working with query strings.",
   "main": "lib/index.js",
@@ -19,7 +19,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vidhav/query-string-helpers.git"
+    "url": "git+https://github.com/vidhav/query-string-utils.git"
   },
   "keywords": [
     "querystring",
@@ -28,9 +28,9 @@
   "author": "Håvard Vidme",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/vidhav/query-string-helpers/issues"
+    "url": "https://github.com/vidhav/query-string-utils/issues"
   },
-  "homepage": "https://github.com/vidhav/query-string-helpers#readme",
+  "homepage": "https://github.com/vidhav/query-string-utils#readme",
   "devDependencies": {
     "@types/jest": "28.1.6",
     "jest": "28.1.3",
