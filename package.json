@@ -1,0 +1,43 @@
+{
+  "name": "query-string-helpers",
+  "version": "0.1.0",
+  "description": "A small collection of helper functions for working with query strings.",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "format": "prettier -w ./src",
+    "lint": "tslint -p tsconfig.json",
+    "postversion" : "git push && git push --tags",
+    "prepublishOnly" : "npm test && npm run lint",
+    "preversion" : "npm run lint",
+    "test": "jest --config jestconfig.json",
+    "version" : "npm run format && git add -A src"
+  },
+  "files": [
+    "lib/**/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vidhav/query-string-helpers.git"
+  },
+  "keywords": [
+    "querystring",
+    "searchparams"
+  ],
+  "author": "Håvard Vidme",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vidhav/query-string-helpers/issues"
+  },
+  "homepage": "https://github.com/vidhav/query-string-helpers#readme",
+  "devDependencies": {
+    "@types/jest": "28.1.6",
+    "jest": "28.1.3",
+    "prettier": "2.7.1",
+    "ts-jest": "28.0.7",
+    "tslint": "6.1.3",
+    "tslint-config-prettier": "1.18.0",
+    "typescript": "4.7.4"
+  }
+}
