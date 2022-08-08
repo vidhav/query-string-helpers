@@ -1,4 +1,4 @@
-import { getQsNumber, getQsNumbers, getQsString, getQsStrings } from '../index';
+import { getQsDate, getQsDates, getQsNumber, getQsNumbers, getQsString, getQsStrings } from '../index';
 
 test('getQsNumber', () => {
   const s = new URLSearchParams([
@@ -70,4 +70,47 @@ test('getQsStrings', () => {
   const nil = getQsStrings(s, 'nil', ['none']);
   expect(nil).toHaveLength(1);
   expect(nil).toEqual(['none']);
+});
+
+test('getQsDate', () => {
+  const s = new URLSearchParams([
+    ['foo', '1997-08-29'],
+    ['bar', '29 Aug 1997 02:14:00 EDT'],
+    ['baz', '32 Aug 1997'],
+  ]);
+
+  const defaultValue = new Date('01 Jan 1970 00:00:00 GMT');
+
+  const foo = getQsDate(s, 'foo', defaultValue);
+  expect(foo).toEqual(new Date('1997-08-29'));
+
+  const bar = getQsDate(s, 'bar', defaultValue);
+  expect(bar).toEqual(new Date('29 Aug 1997 02:14:00 EDT'));
+
+  const baz = getQsDate(s, 'baz', defaultValue);
+  expect(baz).toBe(defaultValue);
+
+  const nil = getQsDate(s, 'nil', defaultValue);
+  expect(nil).toBe(defaultValue);
+});
+
+test('getQsDates', () => {
+  const s = new URLSearchParams([
+    ['foo', '1962-10-16'],
+    ['foo', '1962-10-28'],
+    ['bar', '31 Dec 1999 23:59:59 GMT'],
+    ['bar', '01 Jan 2000 00:00:01 GMT'],
+    ['baz', '30 Dec 1999'],
+    ['baz', '31 Dec 1999'],
+    ['baz', '32 Dec 1999'],
+  ]);
+
+  const foo = getQsDates(s, 'foo', []);
+  expect(foo).toEqual([new Date('1962-10-16'), new Date('1962-10-28')]);
+
+  const bar = getQsDates(s, 'bar', []);
+  expect(bar).toEqual([new Date('31 Dec 1999 23:59:59 GMT'), new Date('01 Jan 2000 00:00:01 GMT')]);
+
+  const baz = getQsDates(s, 'baz', []);
+  expect(baz).toEqual([new Date('30 Dec 1999'), new Date('31 Dec 1999')]);
 });

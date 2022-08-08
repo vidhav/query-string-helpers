@@ -24,6 +24,19 @@ export const getQsString = (searchParams: URLSearchParams, key: string, defaultV
 };
 
 /**
+ * Returns a Date object.
+ *
+ * If value is not a parsable date string, defaultValue is returned.
+ */
+export const getQsDate = (searchParams: URLSearchParams, key: string, defaultValue: Date = new Date()): Date => {
+  const value = searchParams.get(key);
+  if (value === null || isNaN(Date.parse(value))) {
+    return defaultValue;
+  }
+  return new Date(value);
+};
+
+/**
  * Returns an array of numeric values.
  *
  * Values that are not a number, will be excluded from result.
@@ -44,6 +57,22 @@ export const getQsNumbers = (searchParams: URLSearchParams, key: string, default
  */
 export const getQsStrings = (searchParams: URLSearchParams, key: string, defaultValue: string[] = []): string[] => {
   const values = searchParams.getAll(key);
+  if (values.length === 0) {
+    return defaultValue;
+  }
+  return values;
+};
+
+/**
+ * Returns a Date object.
+ *
+ * If value is not a parsable by JavaScript Date, defaultValue is returned.
+ */
+export const getQsDates = (searchParams: URLSearchParams, key: string, defaultValue: Date[] = []): Date[] => {
+  const values = searchParams
+    .getAll(key)
+    .filter((value) => isNaN(Date.parse(value)) === false)
+    .map((value) => new Date(value));
   if (values.length === 0) {
     return defaultValue;
   }
