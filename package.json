@@ -1,6 +1,6 @@
 {
   "name": "query-string-utils",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A small collection of utility functions for working with query strings.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -8,11 +8,11 @@
     "build": "tsc",
     "format": "prettier -w ./src",
     "lint": "tslint -p tsconfig.json",
-    "postversion" : "git push && git push --tags",
-    "prepublishOnly" : "npm test && npm run lint",
-    "preversion" : "npm run lint",
+    "postversion": "git push && git push --tags",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
     "test": "jest --config jestconfig.json",
-    "version" : "npm run format && git add -A src"
+    "version": "npm run format && git add -A src"
   },
   "files": [
     "lib/**/*"
