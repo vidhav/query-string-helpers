@@ -1,80 +1,49 @@
-/**
- * Returns a single numeric value.
- *
- * If value is not a number, the defaultValue will be returned.
- */
-export const getQsNumber = (searchParams: URLSearchParams, key: string, defaultValue: number = 0): number => {
-  const value = searchParams.get(key);
-  if (value === null || value === '') {
-    return defaultValue;
-  }
-  const numeric = Number(value);
-  return isNaN(numeric) ? defaultValue : numeric;
-};
+const TRUE_VALUES = ['true', 't', 'yes', 'on', '1'];
 
 /**
- * Returns a single string value.
+ * Get a list of valid numbers from the query string.
  */
-export const getQsString = (searchParams: URLSearchParams, key: string, defaultValue: string = ''): string => {
-  const value = searchParams.get(key);
-  if (value === null) {
-    return defaultValue;
+export const getQsNumber = (searchParams: URLSearchParams, key: string): number[] => {
+  if (searchParams.has(key) === false) {
+    return [];
   }
-  return value;
-};
-
-/**
- * Returns a Date object.
- *
- * If value is not a parsable date string, defaultValue is returned.
- */
-export const getQsDate = (searchParams: URLSearchParams, key: string, defaultValue: Date = new Date()): Date => {
-  const value = searchParams.get(key);
-  if (value === null || isNaN(Date.parse(value))) {
-    return defaultValue;
-  }
-  return new Date(value);
-};
-
-/**
- * Returns an array of numeric values.
- *
- * Values that are not a number, will be excluded from result.
- */
-export const getQsNumbers = (searchParams: URLSearchParams, key: string, defaultValue: number[] = []): number[] => {
-  const values = searchParams
+  return searchParams
     .getAll(key)
     .map((value) => Number(value))
     .filter((value) => isNaN(value) === false);
-  if (values.length === 0) {
-    return defaultValue;
-  }
-  return values;
 };
 
 /**
- * Returns an array of strings.
+ * Get a list of strings from the query string.
  */
-export const getQsStrings = (searchParams: URLSearchParams, key: string, defaultValue: string[] = []): string[] => {
-  const values = searchParams.getAll(key);
-  if (values.length === 0) {
-    return defaultValue;
+export const getQsString = (searchParams: URLSearchParams, key: string): string[] => {
+  if (searchParams.has(key) === false) {
+    return [];
   }
-  return values;
+  return searchParams.getAll(key);
 };
 
 /**
- * Returns a Date object.
- *
- * If value is not a parsable by JavaScript Date, defaultValue is returned.
+ * Get a list of valid dates from the query string.
  */
-export const getQsDates = (searchParams: URLSearchParams, key: string, defaultValue: Date[] = []): Date[] => {
-  const values = searchParams
+export const getQsDate = (searchParams: URLSearchParams, key: string): Date[] => {
+  if (searchParams.has(key) === false) {
+    return [];
+  }
+  return searchParams
     .getAll(key)
     .filter((value) => isNaN(Date.parse(value)) === false)
     .map((value) => new Date(value));
-  if (values.length === 0) {
-    return defaultValue;
+};
+
+/**
+ * Get a list of truthy values from the query string.
+ *
+ * Truthy values: true, t, yes, on, 1
+ */
+export const getQsBoolean = (searchParams: URLSearchParams, key: string): boolean[] => {
+  if (searchParams.has(key) === false) {
+    return [];
   }
-  return values;
+  return searchParams.getAll(key).map((value) => TRUE_VALUES.includes(value.trim().toLowerCase()));
 };
